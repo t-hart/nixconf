@@ -36,6 +36,8 @@ in
         # handle NVIDIA optimus power management quirk
         options bbswitch load_state=-1 unload_state=1
       '';
+
+      postBootCommands = ''mount -t ntfs-3g /dev/nvme0n1p11 /shared'';
     };
 
     system.autoUpgrade.enable = true;
