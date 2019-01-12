@@ -37,8 +37,11 @@ in
         options bbswitch load_state=-1 unload_state=1
       '';
 
-      postBootCommands = ''mount -t ntfs-3g /dev/nvme0n1p11 /shared'';
+      postBootCommands = ''
+        mount -t ntfs-3g /dev/nvme0n1p11 /shared
+        '';
     };
+
 
     system.autoUpgrade.enable = true;
 
@@ -75,42 +78,48 @@ in
     # List packages installed in system profile. To search, run:
     # $ nix search wget
     nixpkgs.config.allowUnfree = true;
-    environment.systemPackages = with pkgs; [
-      alacritty
-      autorandr
-      curl
-      dotnet-sdk
-      dotnetPackages.Nuget
-      emacs
-      fd
-      firefox
-      fish
-      git
-      ispell
-      libinput
-      libinput-gestures
-      ntfs3g
-      networkmanager
-      opam
-      pandoc
-      pciutils
-      pijul
-      powertop
-      python3
-      ripgrep
-      slack
-      spotify
-      tmux
-      vim
-      thunderbolt
-      tree
-      weechat
-      wget
-      xcape
-      xorg.xev
-      xorg.xkbcomp
-      xwayland
-    ];
+    environment = {
+      systemPackages = with pkgs; [
+        alacritty
+        autorandr
+        curl
+        dotnet-sdk
+        dotnetPackages.Nuget
+        emacs
+        fd
+        firefox
+        fish
+        git
+        ispell
+        libinput
+        libinput-gestures
+        ntfs3g
+        networkmanager
+        opam
+        pandoc
+        pciutils
+        pijul
+        powertop
+        python3
+        ripgrep
+        slack
+        spotify
+        tmux
+        vim
+        thunderbolt
+        tree
+        weechat
+        wget
+        xcape
+        xorg.xev
+        xorg.xkbcomp
+        xwayland
+      ];
+
+      interactiveShellInit = ''
+        alias nixdot='git --git-dir=/etc/nixos/git --work-tree=/etc/nixos/'
+      '';
+    };
 
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.
