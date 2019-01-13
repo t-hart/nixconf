@@ -204,7 +204,7 @@ in
 
       # desktopManager.plasma5.enable = true;
       desktopManager.xfce.enable = true;
-      desktopManager.gnome3.enable = true;
+      # desktopManager.gnome3.enable = true;
 
       # videoDrivers = [ "nvidiaBeta" ];
       # videoDrivers = [ "intel" ];
