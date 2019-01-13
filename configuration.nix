@@ -15,7 +15,7 @@ in
     boot = {
       loader.systemd-boot.enable = true;
       loader.efi.canTouchEfiVariables = true;
-      kernelParams = ["acpi_rev_override" "nomodeset"];
+      kernelParams = ["acpi_rev_override" "nomodeset" "mem_sleep_default=deep" ];
       kernelPackages = pkgs.linuxPackages_latest;
       # extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
 
