@@ -17,6 +17,7 @@ in
       loader.efi.canTouchEfiVariables = true;
       kernelParams = ["acpi_rev_override" "nomodeset"];
       kernelPackages = pkgs.linuxPackages_latest;
+      # extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
 
       blacklistedKernelModules = [
         "nouveau"
@@ -27,9 +28,16 @@ in
         "uvcvideo"
       ];
 
+      # initrd.kernelModules = [
+      # "nvidia"
+      # "nvidia_modeset"
+      # "nvidia_uvm"
+      # "nvidia_drm"
+      # ];
+
       extraModprobeConfig = ''
         # handle NVIDIA optimus power management quirk
-        options bbswitch load_state=-1 unload_state=1
+        options bbswitch load_state=-1 unload_state=1 nvidia-drm modeset=1
       '';
 
       postBootCommands = ''
@@ -119,11 +127,11 @@ in
     # };
 
     # hardware.bumblebee = { enable = true; pmMethod = "none"; };
-    # hardware.bumblebee = { enable = true; group = "video"; connectDisplay = true; pmMethod = "none"; };
+    hardware.bumblebee = { enable = true; group = "video"; connectDisplay = true; pmMethod = "none"; };
 
-    hardware.nvidiaOptimus.disable = true;
-    hardware.opengl.extraPackages = [ pkgs.linuxPackages.nvidia_x11.out ];
-    hardware.opengl.extraPackages32 = [ pkgs.linuxPackages.nvidia_x11.lib32 ];
+    # hardware.nvidiaOptimus.disable = true;
+    # hardware.opengl.extraPackages = [ pkgs.linuxPackages.nvidia_x11.out ];
+    # hardware.opengl.extraPackages32 = [ pkgs.linuxPackages.nvidia_x11.lib32 ];
     # hardware.opengl.driSupport32Bit = true;
 
     services.xserver = {
@@ -152,7 +160,7 @@ in
 
       # videoDrivers = [ "nvidiaBeta" ];
       # videoDrivers = [ "intel" ];
-      # # videoDrivers = [ "nouveau" ];
+      # videoDrivers = [ "nouveau" ];
       # videoDrivers = [ "modesetting" ];
       # videoDrivers = [ "nvidia" ];
 
