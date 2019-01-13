@@ -71,6 +71,7 @@ in
     nixpkgs.config.allowUnfree = true;
     environment = {
       systemPackages = with pkgs; [
+        acpi
         alacritty
         autorandr
         curl
