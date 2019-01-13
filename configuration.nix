@@ -175,6 +175,8 @@ in
       xkbVariant = "dvp";
       xkbOptions = "ctrl:nocaps";
       exportConfiguration = true;
+      autoRepeatDelay = 250;
+      autoRepeatInterval = 150;
 
       # displayManager.gdm = {
       #   enable = true;
