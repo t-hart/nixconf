@@ -111,6 +111,7 @@ in
         weechat
         wget
         xcape
+        xclip
         xorg.xev
         xorg.xkbcomp
         xwayland
