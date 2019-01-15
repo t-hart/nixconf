@@ -68,6 +68,7 @@ in
         alacritty
         arandr
         autorandr
+        bind
         curl
         dotnet-sdk
         dotnetPackages.Nuget
