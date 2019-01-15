@@ -30,7 +30,7 @@ in
 
       extraModprobeConfig = ''
         # handle NVIDIA optimus power management quirk
-        options bbswitch load_state=-1 unload_state=1 nvidia-drm modeset=1
+        options bbswitch load_state=-1 unload_state=1 nvidia-drm
       '';
 
       postBootCommands = ''
