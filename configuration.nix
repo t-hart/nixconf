@@ -17,7 +17,7 @@ in
       loader.efi.canTouchEfiVariables = true;
       kernelParams = ["acpi_rev_override" "mem_sleep_default=deep" ];
       kernelPackages = pkgs.linuxPackages_latest;
-      # extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
+      extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
 
       blacklistedKernelModules = [
         "nouveau"
