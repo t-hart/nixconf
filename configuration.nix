@@ -28,13 +28,6 @@ in
         "uvcvideo"
       ];
 
-      # initrd.kernelModules = [
-      # "nvidia"
-      # "nvidia_modeset"
-      # "nvidia_uvm"
-      # "nvidia_drm"
-      # ];
-
       extraModprobeConfig = ''
         # handle NVIDIA optimus power management quirk
         options bbswitch load_state=-1 unload_state=1 nvidia-drm modeset=1
