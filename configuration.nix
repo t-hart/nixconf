@@ -159,6 +159,7 @@ in
       # videoDrivers = [ "nouveau" ];
       # videoDrivers = [ "modesetting" ];
       # videoDrivers = [ "nvidia" ];
+      videoDrivers = [ "nvidia" "intel" ];
 
       windowManager.exwm = {
         # enable = true;
