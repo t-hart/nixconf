@@ -66,6 +66,7 @@ in
       systemPackages = with pkgs; [
         acpi
         alacritty
+        arandr
         autorandr
         curl
         dotnet-sdk
