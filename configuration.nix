@@ -160,7 +160,7 @@ in
       # videoDrivers = [ "nvidia" ];
 
       windowManager.exwm = {
-        enable = true;
+        # enable = true;
         # enableDefaultConfig = false;
       };
 
