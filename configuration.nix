@@ -144,10 +144,10 @@ in
       autoRepeatDelay = 250;
       autoRepeatInterval = 150;
 
-      displayManager.lightdm = {
+      displayManager.slim = {
         enable = true;
-        autoLogin.enable = true;
-        autoLogin.user = "thomas";
+        # autoLogin.enable = true;
+        # autoLogin.user = "thomas";
       };
 
 
