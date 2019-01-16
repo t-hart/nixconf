@@ -123,7 +123,7 @@ in
     # };
 
     # hardware.bumblebee = { enable = true; pmMethod = "none"; };
-    hardware.bumblebee = { enable = true; group = "video"; connectDisplay = true; pmMethod = "none"; };
+    # hardware.bumblebee = { enable = true; group = "video"; connectDisplay = true; pmMethod = "none"; };
 
     # hardware.nvidiaOptimus.disable = true;
     # hardware.opengl.extraPackages = [ pkgs.linuxPackages.nvidia_x11.out ];
