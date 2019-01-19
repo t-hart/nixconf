@@ -1,11 +1,18 @@
 { config, pkgs, ... }:
 
 let
+  # keyboard
   compiledLayout = pkgs.runCommand "keyboard-layout" {} ''
     ${pkgs.xorg.xkbcomp}/bin/xkbcomp ${/etc/nixos/layout.xkb} $out
   '';
-  defaultFragments = 2 * 44100 * 16 / 32768 * 1000;
-  defaultFragmentSizeMsec = defaultFragments / 32768;
+
+  # audio
+  samplingRate = 2 * 44100 * 16;
+  # (buffer size / sampling rate) in milliseconds
+  bufferSizeMs = (352800 * 1000) / samplingRate;
+  # (fragment size / sampling rate) in milliseconds
+  fragmentSizeMs = (176400 * 1000) / samplingRate;
+  defaultFragments = bufferSizeMs / fragmentSizeMs;
 in
 {
     imports =
@@ -17,7 +24,7 @@ in
     boot = {
       loader.systemd-boot.enable = true;
       loader.efi.canTouchEfiVariables = true;
-      kernelParams = ["acpi_rev_override" "mem_sleep_default=deep" ];
+      kernelParams = ["acpi_rev_override" "mem_sleep_default=deep" "intel_iommu=igfx_off" ];
       kernelPackages = pkgs.linuxPackages_latest;
       extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
 
@@ -117,12 +124,10 @@ in
       enable = true;
       package = pkgs.pulseaudioFull;
       support32Bit = true;
-      # extraConfig = ''
-      # tsched=0
-      # '';
+      extraConfig = ''load-module module-udev-detect tsched=0'';
       daemon.config = {
         default-fragments = defaultFragments;
-        default-fragment-size-msec = defaultFragmentSizeMsec;
+        default-fragment-size-msec = fragmentSizeMs;
       };
     };
 
