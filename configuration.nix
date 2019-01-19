@@ -4,6 +4,8 @@ let
   compiledLayout = pkgs.runCommand "keyboard-layout" {} ''
     ${pkgs.xorg.xkbcomp}/bin/xkbcomp ${/etc/nixos/layout.xkb} $out
   '';
+  defaultFragments = 2 * 44100 * 16 / 32768 * 1000;
+  defaultFragmentSizeMsec = defaultFragments / 32768;
 in
 {
     imports =
@@ -111,7 +113,18 @@ in
 
     # Enable sound.
     sound.enable = true;
-    hardware.pulseaudio.enable = true;
+    hardware.pulseaudio = {
+      enable = true;
+      package = pkgs.pulseaudioFull;
+      support32Bit = true;
+      # extraConfig = ''
+      # tsched=0
+      # '';
+      daemon.config = {
+        default-fragments = defaultFragments;
+        default-fragment-size-msec = defaultFragmentSizeMsec;
+      };
+    };
 
     # hardware.nvidia = {
     #   modesetting.enable = true;
