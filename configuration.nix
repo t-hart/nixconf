@@ -78,6 +78,7 @@ in
         arandr
         autorandr
         bind
+        cargo
         curl
         dotnet-sdk
         dotnetPackages.Nuget
@@ -98,6 +99,7 @@ in
         powertop
         python3
         ripgrep
+        rustc
         slack
         spotify
         tmux
@@ -141,10 +143,10 @@ in
     # };
 
     # hardware.bumblebee = { enable = true; pmMethod = "none"; };
-    # hardware.bumblebee = { enable = true; group = "video"; connectDisplay = true; pmMethod = "none"; };
+    hardware.bumblebee = { enable = true; group = "video"; connectDisplay = true; pmMethod = "none"; };
 
-    # hardware.nvidiaOptimus.disable = true;
-    # hardware.opengl.extraPackages = [ pkgs.linuxPackages.nvidia_x11.out ];
+    hardware.nvidiaOptimus.disable = true;
+    hardware.opengl.extraPackages = [ pkgs.linuxPackages.nvidia_x11.out ];
     # hardware.opengl.extraPackages32 = [ pkgs.linuxPackages.nvidia_x11.lib32 ];
     # hardware.opengl.driSupport32Bit = true;
 
@@ -177,7 +179,7 @@ in
       # videoDrivers = [ "nouveau" ];
       # videoDrivers = [ "modesetting" ];
       # videoDrivers = [ "nvidia" ];
-      videoDrivers = [ "nvidia" "intel" ];
+      # videoDrivers = [ "nvidia" "intel" ];
 
       windowManager.exwm = {
         # enable = true;
