@@ -167,8 +167,8 @@ in
 
       displayManager.slim = {
         enable = true;
-        # autoLogin.enable = true;
-        # autoLogin.user = "thomas";
+        autoLogin = true;
+        defaultUser = "thomas";
       };
 
 
