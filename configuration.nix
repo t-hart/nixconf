@@ -102,6 +102,7 @@ in
         rustc
         slack
         spotify
+        teensy-loader-cli
         tmux
         vim
         thunderbolt
