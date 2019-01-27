@@ -159,7 +159,6 @@ in
         disableWhileTyping = true;
       };
       layout = "us";
-      xkbModel = "pc104";
       xkbVariant = "dvp";
       xkbOptions = "ctrl:nocaps";
       exportConfiguration = true;
