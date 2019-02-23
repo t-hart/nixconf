@@ -158,8 +158,7 @@ in
         naturalScrolling = true;
         disableWhileTyping = true;
       };
-      layout = "us";
-      xkbVariant = "dvp";
+      # xkbVariant = "dvp";
       xkbOptions = "ctrl:nocaps";
       exportConfiguration = true;
       autoRepeatDelay = 250;
