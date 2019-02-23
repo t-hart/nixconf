@@ -102,6 +102,7 @@ in
         spotify
         teensy-loader-cli
         tmux
+        unzip
         vim
         thunderbolt
         tree
@@ -112,6 +113,7 @@ in
         xorg.xev
         xorg.xkbcomp
         xwayland
+        zip
       ];
 
       interactiveShellInit = ''
