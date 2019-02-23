@@ -76,6 +76,7 @@ in
         bind
         cargo
         curl
+        docker
         dotnet-sdk
         dotnetPackages.Nuget
         emacs
