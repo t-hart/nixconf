@@ -38,6 +38,9 @@ in
       postBootCommands = ''
         mount -t ntfs-3g /dev/nvme0n1p11 /shared # mount the windows/linux shared drive
         '';
+
+      tmpOnTmpfs = true;
+
     };
 
 
