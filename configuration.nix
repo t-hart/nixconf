@@ -180,10 +180,11 @@ in
       # videoDrivers = [ "nvidia" ];
       # videoDrivers = [ "nvidia" "intel" ];
 
-      windowManager.exwm = {
-        # enable = true;
-        # enableDefaultConfig = false;
-      };
+      # windowManager.exwm = {
+      #   enable = true;
+      #   enableDefaultConfig = false;
+      # };
+      # windowManager.default = "exwm";
 
       # windowManager.xmonad = {
       #   enable = true;
@@ -194,7 +195,6 @@ in
       #     haskellPackages.xmonad
       #   ];
       # };
-      # windowManager.default = "exwm";
 
     };
 
