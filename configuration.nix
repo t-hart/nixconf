@@ -87,8 +87,9 @@ in
         ispell
         libinput
         libinput-gestures
-        ntfs3g
         networkmanager
+        nodejs
+        ntfs3g
         opam
         pandoc
         pciutils
@@ -134,6 +135,11 @@ in
     #     intelBusId = "PCI:0:2:0";
     #   };
     # };
+    programs = {
+      fish.enable = true;
+      ssh.startAgent = true;
+      npm.enable = true;
+    };
 
     # hardware.bumblebee = { enable = true; pmMethod = "none"; };
     hardware.bumblebee = { enable = true; group = "video"; connectDisplay = true; pmMethod = "none"; };
