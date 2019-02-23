@@ -6,13 +6,6 @@ let
     ${pkgs.xorg.xkbcomp}/bin/xkbcomp ${/etc/nixos/layout.xkb} $out
   '';
 
-  # audio
-  samplingRate = 2 * 44100 * 16;
-  # (buffer size / sampling rate) in milliseconds
-  bufferSizeMs = (352800 * 1000) / samplingRate;
-  # (fragment size / sampling rate) in milliseconds
-  fragmentSizeMs = (176400 * 1000) / samplingRate;
-  defaultFragments = bufferSizeMs / fragmentSizeMs;
 in
 {
     imports =
@@ -127,11 +120,6 @@ in
       enable = true;
       package = pkgs.pulseaudioFull;
       support32Bit = true;
-      extraConfig = ''load-module module-udev-detect tsched=0'';
-      daemon.config = {
-        default-fragments = defaultFragments;
-        default-fragment-size-msec = fragmentSizeMs;
-      };
     };
 
     # hardware.nvidia = {
