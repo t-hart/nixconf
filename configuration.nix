@@ -96,7 +96,6 @@ in
         haskellPackages.stylish-haskell
         haskellPackages.hasktags
         haskellPackages.hoogle
-        haskellPackages.ghc-mod
         haskellPackages.hakyll
         ispell
         libinput
