@@ -84,6 +84,14 @@ in
         firefox
         fish
         git
+        haskellPackages.apply-refact
+        haskellPackages.hlint
+        haskellPackages.hindent
+        haskellPackages.stylish-haskell
+        haskellPackages.hasktags
+        haskellPackages.hoogle
+        haskellPackages.ghc-mod
+        haskellPackages.hakyll
         ispell
         libinput
         libinput-gestures
@@ -100,6 +108,7 @@ in
         rustc
         slack
         spotify
+        stack
         teensy-loader-cli
         tmux
         unzip
