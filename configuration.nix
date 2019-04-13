@@ -200,16 +200,6 @@ in
       # };
       # windowManager.default = "exwm";
 
-      # windowManager.xmonad = {
-      #   enable = true;
-      #   enableContribAndExtras = true;
-      #   extraPackages = haskellPackages: [
-      #     haskellPackages.xmonad-contrib
-      #     haskellPackages.xmonad-extras
-      #     haskellPackages.xmonad
-      #   ];
-      # };
-
     };
 
     # This value determines the NixOS release with which your system is to be
