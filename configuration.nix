@@ -162,7 +162,7 @@ in
 
     hardware.nvidiaOptimus.disable = true;
     hardware.opengl.extraPackages = [ pkgs.linuxPackages.nvidia_x11.out ];
-    # hardware.opengl.extraPackages32 = [ pkgs.linuxPackages.nvidia_x11.lib32 ];
+    hardware.opengl.extraPackages32 = [ pkgs.linuxPackages.nvidia_x11.lib32 ];
     # hardware.opengl.driSupport32Bit = true;
 
     services.xserver = {
