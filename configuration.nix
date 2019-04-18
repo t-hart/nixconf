@@ -193,7 +193,7 @@ in
         disableWhileTyping = true;
       };
       # xkbVariant = "dvp";
-      xkbOptions = "ctrl:nocaps";
+      # xkbOptions = "ctrl:nocaps";
       exportConfiguration = true;
       autoRepeatDelay = 250;
       autoRepeatInterval = 150;
