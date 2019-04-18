@@ -96,51 +96,26 @@ in
     environment = {
       systemPackages = with pkgs; [
         acpi
-        alacritty
         arandr
         autorandr
         bind
-        cargo
         curl
-        docker
-        dotnet-sdk
-        dotnetPackages.Nuget
         emacs
         fd
-        firefox
         fish
         git
-        haskellPackages.apply-refact
-        haskellPackages.hlint
-        haskellPackages.hindent
-        haskellPackages.stylish-haskell
-        haskellPackages.hasktags
-        haskellPackages.hoogle
-        haskellPackages.hakyll
         ispell
         libinput
         libinput-gestures
         networkmanager
-        nodejs
         ntfs3g
-        opam
-        pandoc
         pciutils
-        pijul
         powertop
-        python3
-        ripgrep
-        rustc
-        slack
-        spotify
-        stack
-        teensy-loader-cli
         tmux
         unzip
         vim
         thunderbolt
         tree
-        weechat
         wget
         xcape
         xclip
