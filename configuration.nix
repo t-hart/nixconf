@@ -58,16 +58,36 @@ in
     i18n = {
       consoleFont = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
       consoleUseXkbConfig = true;
+      defaultLocale = "en_US.UTF-8";
+
+      inputMethod = {
+        enabled =  "fcitx";
+        fcitx.engines = with pkgs.fcitx-engines; [ mozc ];
+      };
     };
 
-    fonts.fonts = with pkgs; [
-        fira-code
-        fira-code-symbols
-        mplus-outline-fonts
-        powerline-fonts
-    ];
+    fonts = {
+      fonts = with pkgs; [
+              dejavu_fonts
+              fira-code
+              fira-code-symbols
+              ipafont
+              kochi-substitute
+              mplus-outline-fonts
+              powerline-fonts
+      ];
 
-    # Set your time zone.
+      fontconfig = {
+        ultimate.enable = true;
+        defaultFonts = {
+          monospace = ["DejaVu Sans Mono" "IPAGothic"];
+          sansSerif = ["DejaVu Sans" "IPAPGothic"];
+          serif = ["DejaVu Serif" "IPAPMincho"];
+        };
+      };
+    };
+
+  # Set your time zone.
     time.timeZone = "Europe/Oslo";
 
     # List packages installed in system profile. To search, run:
