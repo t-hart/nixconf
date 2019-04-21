@@ -96,6 +96,7 @@ in
     environment = {
       systemPackages = with pkgs; [
         acpi
+        any-nix-shell
         arandr
         autorandr
         bind
@@ -147,7 +148,12 @@ in
     #   };
     # };
     programs = {
-      fish.enable = true;
+      fish = {
+        enable = true;
+        promptInit = ''
+          any-nix-shell fish --info-right | source
+        '';
+      };
       ssh.startAgent = true;
       npm.enable = true;
     };
