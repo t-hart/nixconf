@@ -139,14 +139,15 @@ in
       support32Bit = true;
     };
 
-    # hardware.nvidia = {
-    #   modesetting.enable = true;
-    #   optimus_prime = {
-    #     enable = true;
-    #     nvidiaBusId = "PCI:1:0:0";
-    #     intelBusId = "PCI:0:2:0";
-    #   };
-    # };
+    hardware.nvidia = {
+      modesetting.enable = true;
+      # optimus_prime = {
+      #   enable = true;
+      #   nvidiaBusId = "PCI:1:0:0";
+      #   intelBusId = "PCI:0:2:0";
+      # };
+    };
+
     programs = {
       fish = {
         enable = true;
