@@ -225,6 +225,12 @@ in
     services.emacs.enable = true;
     services.emacs.defaultEditor = true;
 
+    services.compton = {
+      enable = true;
+      backend = "glx";
+      shadow = true;
+    };
+
     systemd.user.services.kb = {
       enable = true;
       description = "keyboard: layout tweaks and xcape";
