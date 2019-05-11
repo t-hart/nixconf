@@ -229,6 +229,11 @@ in
       shadow = true;
     };
 
+    services.offlineimap = {
+      enable = true;
+      install = true;
+    };
+
     systemd.user.services.kb = {
       enable = true;
       description = "keyboard: layout tweaks and xcape";
