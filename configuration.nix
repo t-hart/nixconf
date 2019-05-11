@@ -215,7 +215,7 @@ in
       name = "thomas";
       group = "users";
       extraGroups = [
-        "wheel" "disk" "audio" "video" "networkmanager" "systemd-journal"
+        "wheel" "disk" "audio" "video" "networkmanager" "systemd-journal" "docker"
       ];
     createHome = true;
     uid = 1000;
@@ -249,6 +249,8 @@ in
     };
 
     services.nixosManual.showManual = true;
+
+    virtualisation.docker.enable = true;
 
 }
 
