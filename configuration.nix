@@ -97,6 +97,8 @@ in
         bind
         curl
         emacs
+        exfat
+        exfat-utils
         fd
         fish
         git
