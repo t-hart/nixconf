@@ -59,11 +59,6 @@ in
       consoleFont = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
       consoleUseXkbConfig = true;
       defaultLocale = "en_US.UTF-8";
-
-      inputMethod = {
-        enabled =  "fcitx";
-        fcitx.engines = with pkgs.fcitx-engines; [ mozc ];
-      };
     };
 
     fonts = {
