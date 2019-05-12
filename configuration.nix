@@ -250,7 +250,6 @@ in
       };
     };
 
-    services.nixosManual.showManual = true;
 
     services.nixosManual.showManual = true;
 
