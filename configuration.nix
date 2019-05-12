@@ -252,8 +252,16 @@ in
 
     services.nixosManual.showManual = true;
 
-    virtualisation.docker.enable = true;
+    services.nixosManual.showManual = true;
 
+    virtualisation.docker = {
+      enable = true;
+      autoPrune = {
+        enable = true;
+        flags = ["--all"];
+      };
+      extraOptions = "--data-root /home/docker";
+    };
 }
 
 #  LocalWords:  thomas dvp LocalWords
