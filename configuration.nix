@@ -224,7 +224,7 @@ in
     services.emacs.defaultEditor = true;
 
     services.compton = {
-      enable = true;
+      enable = false;
       backend = "glx";
       shadow = true;
     };
