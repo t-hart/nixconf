@@ -1,12 +1,5 @@
 { config, pkgs, ... }:
 
-let
-  # keyboard
-  compiledLayout = pkgs.runCommand "keyboard-layout" {} ''
-    ${pkgs.xorg.xkbcomp}/bin/xkbcomp ${/etc/nixos/layout.xkb} $out
-  '';
-
-in
 {
     imports =
       [ # Include the results of the hardware scan.
@@ -135,7 +128,7 @@ in
     hardware.nvidia = {
       modesetting.enable = true;
       # optimus_prime = {
-      #   enable = true;
+        #   enable = true;
       #   nvidiaBusId = "PCI:1:0:0";
       #   intelBusId = "PCI:0:2:0";
       # };
@@ -229,23 +222,6 @@ in
       enable = true;
       install = true;
     };
-
-    systemd.user.services.kb = {
-      enable = true;
-      description = "keyboard: layout tweaks and xcape";
-      wantedBy = [ "graphical.target" "default.target" ];
-      preStart = ''
-        ${pkgs.xorg.xkbcomp}/bin/xkbcomp ${compiledLayout} $DISPLAY
-      '';
-      restartIfChanged = true;
-      serviceConfig = {
-        Type = "forking";
-        Restart = "always";
-        RestartSec = 2;
-        ExecStart = "${pkgs.xcape}/bin/xcape -t 250 -e \'Shift_L=dollar;Shift_R=numbersign;Control_L=Escape;Control_R=Return\'";
-      };
-    };
-
 
     services.nixosManual.showManual = true;
 
