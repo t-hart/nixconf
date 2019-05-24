@@ -1,5 +1,12 @@
 { config, pkgs, ... }:
 
+let
+  # keyboard
+  compiledLayout = pkgs.runCommand "keyboard-layout" {} ''
+    ${pkgs.xorg.xkbcomp}/bin/xkbcomp ${/etc/nixos/layout.xkb} $out
+  '';
+
+in
 {
     imports =
       [ # Include the results of the hardware scan.
@@ -231,7 +238,23 @@
         enable = true;
         flags = ["--all"];
       };
-      extraOptions = "--data-root /home/docker";
+    };
+
+
+    systemd.user.services.kb = {
+      enable = true;
+      description = "keyboard: layout tweaks and xcape";
+      wantedBy = [ "graphical.target" "default.target" ];
+      preStart = ''
+        ${pkgs.xorg.xkbcomp}/bin/xkbcomp ${compiledLayout} $DISPLAY
+      '';
+      restartIfChanged = true;
+      serviceConfig = {
+        Type = "forking";
+        Restart = "always";
+        RestartSec = 2;
+        ExecStart = "${pkgs.xcape}/bin/xcape -t 250 -e \'Shift_L=dollar;Shift_R=numbersign;Control_L=Escape;Control_R=Return\'";
+      };
     };
 }
 
