@@ -216,12 +216,6 @@ in
     services.emacs.enable = true;
     services.emacs.defaultEditor = true;
 
-    services.compton = {
-      enable = false;
-      backend = "glx";
-      shadow = true;
-    };
-
     services.offlineimap = {
       enable = true;
       install = true;
