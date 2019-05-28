@@ -102,7 +102,6 @@ in
         libinput
         libinput-gestures
         networkmanager
-        ntfs3g
         pciutils
         powertop
         tmux
@@ -115,7 +114,6 @@ in
         xclip
         xorg.xev
         xorg.xkbcomp
-        xwayland
         zip
       ];
 
