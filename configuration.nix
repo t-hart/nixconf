@@ -147,7 +147,6 @@ in
         '';
       };
       ssh.startAgent = true;
-      npm.enable = true;
     };
 
     # hardware.bumblebee = { enable = true; pmMethod = "none"; };
