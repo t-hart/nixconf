@@ -130,14 +130,9 @@ in
       support32Bit = true;
     };
 
-    hardware.nvidia = {
-      modesetting.enable = true;
-      # optimus_prime = {
-        #   enable = true;
-      #   nvidiaBusId = "PCI:1:0:0";
-      #   intelBusId = "PCI:0:2:0";
-      # };
-    };
+    # hardware.nvidia = {
+    #   modesetting.enable = true;
+    # };
 
     programs = {
       fish = {
@@ -155,7 +150,7 @@ in
     hardware.nvidiaOptimus.disable = true;
     hardware.opengl.extraPackages = [ pkgs.linuxPackages.nvidia_x11.out ];
     hardware.opengl.extraPackages32 = [ pkgs.linuxPackages.nvidia_x11.lib32 ];
-    # hardware.opengl.driSupport32Bit = true;
+    hardware.opengl.driSupport32Bit = true;
 
     services.xserver = {
       enable = true;
@@ -164,8 +159,6 @@ in
         naturalScrolling = true;
         disableWhileTyping = true;
       };
-      # xkbVariant = "dvp";
-      # xkbOptions = "ctrl:nocaps";
       exportConfiguration = true;
       autoRepeatDelay = 250;
       autoRepeatInterval = 150;
@@ -184,7 +177,7 @@ in
       # videoDrivers = [ "nouveau" ];
       # videoDrivers = [ "modesetting" ];
       # videoDrivers = [ "nvidia" ];
-      # videoDrivers = [ "nvidia" "intel" ];
+      videoDrivers = [ "nvidia" "intel" ];
 
       # windowManager.exwm = {
       #   enable = true;
