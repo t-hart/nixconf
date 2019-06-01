@@ -99,6 +99,7 @@ in
         fish
         git
         ispell
+        killall
         libinput
         libinput-gestures
         networkmanager
