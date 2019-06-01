@@ -31,12 +31,10 @@ in
       ];
 
       extraModprobeConfig = ''
-        # handle NVIDIA optimus power management quirk
         options bbswitch load_state=-1 unload_state=1 nvidia-drm
       '';
 
       tmpOnTmpfs = true;
-
     };
 
     nix.gc = {
@@ -131,10 +129,6 @@ in
       support32Bit = true;
     };
 
-    # hardware.nvidia = {
-    #   modesetting.enable = true;
-    # };
-
     programs = {
       fish = {
         enable = true;
@@ -145,13 +139,19 @@ in
       ssh.startAgent = true;
     };
 
-    # hardware.bumblebee = { enable = true; pmMethod = "none"; };
-    hardware.bumblebee = { enable = true; group = "video"; connectDisplay = true; pmMethod = "none"; };
-
     hardware.nvidiaOptimus.disable = true;
-    hardware.opengl.extraPackages = [ pkgs.linuxPackages.nvidia_x11.out ];
-    hardware.opengl.extraPackages32 = [ pkgs.linuxPackages.nvidia_x11.lib32 ];
-    hardware.opengl.driSupport32Bit = true;
+    hardware.opengl = {
+      extraPackages = [ pkgs.linuxPackages.nvidia_x11.out ];
+      extraPackages32 = [ pkgs.linuxPackages.nvidia_x11.lib32 ];
+      driSupport32Bit = true;
+    };
+
+    hardware.bumblebee = {
+      enable = true;
+      group = "video";
+      connectDisplay = true;
+      pmMethod = "none";
+    };
 
     services.xserver = {
       enable = true;
@@ -170,15 +170,7 @@ in
         defaultUser = "thomas";
       };
 
-
       desktopManager.xfce.enable = true;
-
-      # videoDrivers = [ "nvidiaBeta" ];
-      # videoDrivers = [ "intel" ];
-      # videoDrivers = [ "nouveau" ];
-      # videoDrivers = [ "modesetting" ];
-      # videoDrivers = [ "nvidia" ];
-      videoDrivers = [ "nvidia" "intel" ];
 
       # windowManager.exwm = {
       #   enable = true;
