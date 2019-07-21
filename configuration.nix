@@ -21,18 +21,18 @@ in
       # kernelPackages = pkgs.linuxPackages_latest;
       extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
 
-      blacklistedKernelModules = [
-        "nouveau"
-        "rivafb"
-        "nvidiafb"
-        "rivatv"
-        "nv"
-        "uvcvideo"
-      ];
+      # blacklistedKernelModules = [
+      #   "nouveau"
+      #   "rivafb"
+      #   "nvidiafb"
+      #   "rivatv"
+      #   "nv"
+      #   "uvcvideo"
+      # ];
 
-      extraModprobeConfig = ''
-        options bbswitch load_state=-1 unload_state=1 nvidia-drm
-      '';
+      # extraModprobeConfig = ''
+      #   options bbswitch load_state=-1 unload_state=1 nvidia-drm
+      # '';
 
       tmpOnTmpfs = true;
     };
@@ -146,12 +146,12 @@ in
       driSupport32Bit = true;
     };
 
-    hardware.bumblebee = {
-      enable = true;
-      group = "video";
-      connectDisplay = true;
-      pmMethod = "none";
-    };
+    # hardware.bumblebee = {
+    #   enable = true;
+    #   group = "video";
+    #   connectDisplay = true;
+    #   pmMethod = "none";
+    # };
 
     services.xserver = {
       enable = true;
