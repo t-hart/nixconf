@@ -171,13 +171,12 @@ in
         defaultUser = "thomas";
       };
 
-      desktopManager.xfce.enable = true;
+      # desktopManager.xfce.enable = true;
 
-      # windowManager.exwm = {
-      #   enable = true;
-      #   enableDefaultConfig = false;
-      # };
-      # windowManager.default = "exwm";
+      windowManager.exwm = {
+        enable = true;
+      };
+      windowManager.default = "exwm";
 
     };
 
