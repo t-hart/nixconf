@@ -247,19 +247,15 @@ in
     #   };
     # };
 
-    systemd.user.services.kb = {
+    systemd.user.services.autorandrize = {
       enable = true;
-      description = "keyboard: layout tweaks and xcape";
-      wantedBy = [ "graphical.target" "default.target" ];
-      preStart = ''
-        ${pkgs.xorg.xkbcomp}/bin/xkbcomp ${compiledLayout} $DISPLAY
-      '';
-      restartIfChanged = true;
+      description = "Automatically adjust screens when waking up";
+      wantedBy = [ "suspend.target" "hibernate.target" "hybrid-sleep.target" ];
+      after = [ "suspend.target" "hibernate.target" "hybrid-sleep.target" ];
       serviceConfig = {
-        Type = "forking";
-        Restart = "always";
-        RestartSec = 2;
-        ExecStart = "${pkgs.xcape}/bin/xcape -t 250 -e \'Shift_L=dollar;Shift_R=numbersign;Control_L=Escape;Control_R=Return\'";
+        Type = "oneshot";
+        TimeOutSec = "0";
+        ExecStart = "${pkgs.autorandr}/bin/autorandr -c";
       };
     };
 }
