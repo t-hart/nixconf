@@ -228,6 +228,9 @@ in
         SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="df11", \
             MODE:="0666", \
             SYMLINK+="stm32_dfu"
+
+        # nvidia CUDA config
+        KERNEL=="nvidia_uvm", RUN+="${pkgs.runtimeShell} -c 'mknod -m 666 /dev/nvidia-uvm c $(grep nvidia-uvm /proc/devices | cut -d \  -f 1) 0'"
     '';
 
 
