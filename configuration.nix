@@ -123,10 +123,11 @@ in
 
     # Enable sound.
     sound.enable = true;
+
     hardware.pulseaudio = {
       enable = true;
-      package = pkgs.pulseaudioFull;
       support32Bit = true;
+      package = pkgs.pulseaudioFull;
     };
 
     programs = {
@@ -193,10 +194,10 @@ in
       extraGroups = [
         "wheel" "disk" "audio" "video" "networkmanager" "systemd-journal" "docker"
       ];
-    createHome = true;
-    uid = 1000;
-    home = "/home/thomas";
-    shell = pkgs.fish;
+      createHome = true;
+      uid = 1000;
+      home = "/home/thomas";
+      shell = pkgs.fish;
     };
 
     services.emacs.enable = true;
