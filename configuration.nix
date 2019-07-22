@@ -21,14 +21,15 @@ in
       # kernelPackages = pkgs.linuxPackages_latest;
       extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
 
-      # blacklistedKernelModules = [
-      #   "nouveau"
-      #   "rivafb"
-      #   "nvidiafb"
-      #   "rivatv"
-      #   "nv"
-      #   "uvcvideo"
-      # ];
+      # As recommended to avoid kernel panics on Dell XPS 9570 by the arch wiki: https://wiki.archlinux.org/index.php/Dell_XPS_15_9570#Graphics
+      blacklistedKernelModules = [
+        "nouveau"
+        "rivafb"
+        "nvidiafb"
+        "rivatv"
+        "nv"
+        "uvcvideo"
+      ];
 
       # extraModprobeConfig = ''
       #   options bbswitch load_state=-1 unload_state=1 nvidia-drm
@@ -140,19 +141,20 @@ in
       ssh.startAgent = true;
     };
 
-    hardware.nvidiaOptimus.disable = true;
-    hardware.opengl = {
-      extraPackages = [ pkgs.linuxPackages.nvidia_x11.out ];
-      extraPackages32 = [ pkgs.linuxPackages.nvidia_x11.lib32 ];
-      driSupport32Bit = true;
-    };
-
-    # hardware.bumblebee = {
-    #   enable = true;
-    #   group = "video";
-    #   connectDisplay = true;
-    #   pmMethod = "none";
+    # hardware.nvidiaOptimus.disable = true;
+    # hardware.opengl = {
+    #   extraPackages = [ pkgs.linuxPackages.nvidia_x11.out ];
+    #   extraPackages32 = [ pkgs.linuxPackages.nvidia_x11.lib32 ];
+    #   driSupport32Bit = true;
     # };
+
+    # https://wiki.archlinux.org/index.php/Dell_XPS_15_9570#Letting_bumblebee_automatically_unload_the_kernel_module
+    hardware.bumblebee = {
+     enable = true;
+     driver = "nvidia";
+     pmMethod = "auto";
+     connectDisplay = true;
+    };
 
     services.xserver = {
       enable = true;
