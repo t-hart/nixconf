@@ -153,12 +153,7 @@ in {
     connectDisplay = true;
   };
 
-  services.tlp = {
-    enable = true;
-    extraConfig = ''
-      RUNTIME_PM_DRIVER_BLACKLIST="nvidia"
-    '';
-  };
+  services.thermald.enable = true;
 
   services.xserver = {
     enable = true;
