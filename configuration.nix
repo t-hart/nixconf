@@ -40,6 +40,10 @@ in {
   system.autoUpgrade.enable = true;
 
   networking.networkmanager.enable = true;
+  networking.firewall = {
+    allowedTCPPorts = [ 17500 ];
+    allowedUDPPorts = [ 17500 ];
+  };
 
   # Select internationalisation properties.
   i18n = {
@@ -83,7 +87,8 @@ in {
       autorandr
       bind
       curl
-      emacs
+      dropbox-cli
+      (emacsWithPackages (epkgs: [ epkgs.emacsql-sqlite ]))
       exfat
       exfat-utils
       fd
@@ -256,6 +261,28 @@ in {
 
   # };
 
+  # based on https://nixos.wiki/wiki/Dropbox and https://discourse.nixos.org/t/using-dropbox-on-nixos/387/5
+  systemd.user.services.dropbox = {
+    description = "Dropbox";
+    after = [ "xembedsniproxy.service" ];
+    wants = [ "xembedsniproxy.service" ];
+    wantedBy = [ "graphical-session.target" ];
+    environment = {
+      QT_PLUGIN_PATH = "/run/current-system/sw/"
+        + pkgs.qt5.qtbase.qtPluginPrefix;
+      QML2_IMPORT_PATH = "/run/current-system/sw/"
+        + pkgs.qt5.qtbase.qtQmlPrefix;
+    };
+    serviceConfig = {
+      ExecStart = "${pkgs.dropbox.out}/bin/dropbox";
+      ExecReload = "${pkgs.coreutils.out}/bin/kill -HUP $MAINPID";
+      KillMode = "control-group"; # upstream recommends process
+      Restart = "on-failure";
+      PrivateTmp = true;
+      ProtectSystem = "full";
+      Nice = 10;
+    };
+  };
   security.sudo.extraConfig = ''
     %wheel ALL=(ALL:ALL) ${pkgs.systemd}/bin/poweroff
     %wheel ALL=(ALL:ALL) ${pkgs.systemd}/bin/reboot
