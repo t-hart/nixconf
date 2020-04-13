@@ -153,11 +153,11 @@ in {
   # };
 
   # https://wiki.archlinux.org/index.php/Dell_XPS_15_9570#Letting_bumblebee_automatically_unload_the_kernel_module
-  hardware.bumblebee = {
-    enable = true;
-    pmMethod = "auto";
-    connectDisplay = true;
-  };
+  # hardware.bumblebee = {
+  #   enable = true;
+  #   pmMethod = "auto";
+  #   connectDisplay = true;
+  # };
 
   services.thermald.enable = true;
 
@@ -172,17 +172,10 @@ in {
     autoRepeatDelay = 250;
     autoRepeatInterval = 150;
 
-    displayManager.slim = {
-      enable = true;
-      autoLogin = true;
-      defaultUser = "thomas";
-    };
-
-    # desktopManager.xfce.enable = true;
+    videoDrivers = [ "intel" "nouveau" ];
 
     windowManager.exwm = { enable = true; };
     windowManager.default = "exwm";
-
   };
 
   # This value determines the NixOS release with which your system is to be
