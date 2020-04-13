@@ -237,23 +237,6 @@ in {
 
   '';
 
-  # systemd.user.services.kb = {
-  #   enable = false;
-  #   description = "keyboard: layout tweaks and xcape";
-  #   wantedBy = [ "graphical.target" "default.target" ];
-  #   preStart = ''
-  #     ${pkgs.xorg.xkbcomp}/bin/xkbcomp ${compiledLayout} $DISPLAY
-  #   '';
-  #   restartIfChanged = true;
-  #   serviceConfig = {
-  #     Type = "forking";
-  #     Restart = "always";
-  #     RestartSec = 2;
-  #     ExecStart = "${pkgs.xcape}/bin/xcape -t 250 -e \'Shift_L=dollar;Shift_R=numbersign;Control_L=Escape;Control_R=Return\'";
-  #   };
-
-  # };
-
   # based on https://nixos.wiki/wiki/Dropbox and https://discourse.nixos.org/t/using-dropbox-on-nixos/387/5
   systemd.user.services.dropbox = {
     description = "Dropbox";
