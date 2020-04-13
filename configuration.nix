@@ -240,8 +240,6 @@ in {
   # based on https://nixos.wiki/wiki/Dropbox and https://discourse.nixos.org/t/using-dropbox-on-nixos/387/5
   systemd.user.services.dropbox = {
     description = "Dropbox";
-    after = [ "xembedsniproxy.service" ];
-    wants = [ "xembedsniproxy.service" ];
     wantedBy = [ "graphical-session.target" ];
     environment = {
       QT_PLUGIN_PATH = "/run/current-system/sw/"
