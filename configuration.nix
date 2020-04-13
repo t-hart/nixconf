@@ -86,6 +86,7 @@ in {
       arandr
       autorandr
       bind
+      cacert
       curl
       dropbox-cli
       (emacsWithPackages (epkgs: [ epkgs.emacsql-sqlite ]))
