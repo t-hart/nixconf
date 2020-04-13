@@ -64,7 +64,6 @@ in {
     ];
 
     fontconfig = {
-      ultimate.enable = true;
       defaultFonts = {
         monospace = [ "DejaVu Sans Mono" "IPAGothic" ];
         sansSerif = [ "DejaVu Sans" "IPAPGothic" ];
