@@ -47,10 +47,13 @@ in {
 
   # Select internationalisation properties.
   i18n = {
-    consoleFont = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
-    consoleUseXkbConfig = true;
     defaultLocale = "en_US.UTF-8";
   };
+
+  console = {
+    useXkbConfig = true;
+    font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
+};
 
   fonts = {
     fonts = with pkgs; [
@@ -174,7 +177,7 @@ in {
     videoDrivers = [ "intel" "nouveau" ];
 
     windowManager.exwm = { enable = true; };
-    windowManager.default = "exwm";
+    displayManager.defaultSession = "none+exwm";
   };
 
   # This value determines the NixOS release with which your system is to be
