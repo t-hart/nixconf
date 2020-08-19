@@ -169,6 +169,9 @@ in {
 
   services.thermald.enable = true;
 
+  # https://github.com/target/lorri/
+  services.lorri.enable = true;
+
   services.xserver = {
     enable = true;
     libinput = {
