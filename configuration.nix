@@ -226,7 +226,7 @@ in {
   services.nixosManual.showManual = true;
 
   virtualisation.docker = {
-    enable = false;
+    enable = true;
     autoPrune = {
       enable = true;
       flags = [ "--all" ];
