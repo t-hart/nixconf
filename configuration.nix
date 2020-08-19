@@ -220,6 +220,7 @@ in {
   services.offlineimap = {
     enable = true;
     install = true;
+    path = [ pkgs.notmuch pkgs.bitwarden-cli pkgs.fish ];
   };
 
   services.nixosManual.showManual = true;
