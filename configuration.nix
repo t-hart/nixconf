@@ -121,6 +121,8 @@ in {
     interactiveShellInit = ''
       alias nixdot='git --git-dir=/etc/nixos/git --work-tree=/etc/nixos/'
     '';
+
+    variables."SSL_CERT_FILE" = "/etc/ssl/certs/ca-bundle.crt";
   };
 
   # Enable sound.
