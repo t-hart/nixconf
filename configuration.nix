@@ -148,6 +148,9 @@ in {
       enable = true;
       clock24 = true;
     };
+    gnupg = {
+      agent.enable = true;
+    };
   };
 
   # hardware.nvidiaOptimus.disable = true;
