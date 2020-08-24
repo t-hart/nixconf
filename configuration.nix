@@ -185,7 +185,11 @@ in {
 
     videoDrivers = [ "intel" "nouveau" ];
 
-    windowManager.exwm = { enable = true; };
+    windowManager.exwm = {
+      enable = true;
+      enableDefaultConfig = false;
+      extraPackages = epkgs: [ epkgs.emacsql-sqlite ];
+    };
     displayManager.defaultSession = "none+exwm";
   };
 
