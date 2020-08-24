@@ -94,6 +94,7 @@ in {
       arandr
       autorandr
       bind
+      bitwarden-cli
       cacert
       curl
       dropbox-cli
