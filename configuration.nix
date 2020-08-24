@@ -46,14 +46,12 @@ in {
   };
 
   # Select internationalisation properties.
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-  };
+  i18n = { defaultLocale = "en_US.UTF-8"; };
 
   console = {
     useXkbConfig = true;
     font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
-};
+  };
 
   fonts = {
     fonts = with pkgs; [
@@ -148,9 +146,7 @@ in {
       enable = true;
       clock24 = true;
     };
-    gnupg = {
-      agent.enable = true;
-    };
+    gnupg = { agent.enable = true; };
   };
 
   # hardware.nvidiaOptimus.disable = true;
