@@ -232,8 +232,6 @@ in {
     path = [ pkgs.notmuch pkgs.bitwarden-cli pkgs.fish ];
   };
 
-  services.nixosManual.showManual = true;
-
   virtualisation.docker = {
     enable = true;
     autoPrune = {
