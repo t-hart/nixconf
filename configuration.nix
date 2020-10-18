@@ -174,6 +174,15 @@ in {
 
   services.thermald.enable = true;
 
+  location.longitude = 10.45;
+  location.latitude = 59.54;
+
+  services.redshift = {
+    enable = true;
+    brightness.night = "0.8";
+    extraOptions = [ "-m randr" ];
+  };
+
   # https://github.com/target/lorri/
   services.lorri.enable = true;
 
