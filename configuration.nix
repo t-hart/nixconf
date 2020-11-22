@@ -201,7 +201,7 @@ in {
     windowManager.exwm = {
       enable = true;
       enableDefaultConfig = false;
-      extraPackages = epkgs: [ epkgs.emacsql-sqlite epkgs.vterm epkgs.pdf-tools ];
+      extraPackages = epkgs: [ epkgs.emacsql-sqlite epkgs.vterm epkgs.magit epkgs.pdf-tools ];
     };
     displayManager.defaultSession = "none+exwm";
   };
