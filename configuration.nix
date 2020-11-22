@@ -96,23 +96,17 @@ in {
       bind
       bitwarden-cli
       cacert
-      cmake
       curl
       dropbox-cli
       exfat
       exfat-utils
       fd
       fish
-      gcc
-      ghostscript
       git
-      gnumake
       ispell
       killall
       libinput
       libinput-gestures
-      libtool
-      libvterm
       networkmanager
       notmuch
       pciutils
