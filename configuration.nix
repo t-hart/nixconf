@@ -6,6 +6,14 @@ let
     ${pkgs.xorg.xkbcomp}/bin/xkbcomp ${/etc/nixos/layout.xkb} $out
   '';
 
+  nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
+    export __NV_PRIME_RENDER_OFFLOAD=1
+    export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
+    export __GLX_VENDOR_LIBRARY_NAME=nvidia
+    export __VK_LAYER_NV_optimus=NVIDIA_only
+    exec -a "$0" "$@"
+  '';
+
 in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -109,6 +117,8 @@ in {
       libinput-gestures
       networkmanager
       notmuch
+      nvidia-offload
+      nvtop
       pciutils
       powertop
       tmux
@@ -157,6 +167,12 @@ in {
     gnupg = { agent.enable = true; };
   };
 
+  hardware.nvidia.prime = {
+    offload.enable = true;
+    nvidiaBusId = "PCI:1:0:0";
+    intelBusId = "PCI:0:2:0";
+  };
+
   # hardware.nvidiaOptimus.disable = true;
   # hardware.opengl = {
   #   extraPackages = [ pkgs.linuxPackages.nvidia_x11.out ];
@@ -196,7 +212,7 @@ in {
     autoRepeatDelay = 250;
     autoRepeatInterval = 150;
 
-    videoDrivers = [ "intel" "nouveau" ];
+    videoDrivers = [ "nvidia" ];
 
     windowManager.exwm = {
       enable = true;
