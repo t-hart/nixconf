@@ -28,14 +28,6 @@ in {
     kernelPackages = pkgs.linuxPackages_latest;
     extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
 
-    # As recommended to avoid kernel panics on Dell XPS 9570 by the arch wiki: https://wiki.archlinux.org/index.php/Dell_XPS_15_9570#Graphics
-    blacklistedKernelModules =
-      [ "nouveau" "rivafb" "nvidiafb" "rivatv" "nv" "uvcvideo" ];
-
-    extraModprobeConfig = ''
-      options bbswitch load_state=-1 unload_state=1 nvidia-drm
-    '';
-
     tmpOnTmpfs = true;
   };
 
