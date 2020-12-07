@@ -216,6 +216,12 @@ in {
         epkgs.pdf-tools
       ];
     };
+
+    screenSection = ''
+      Option "TripleBuffer" "On"
+    '';
+
+    displayManager.autoLogin.user = "thomas";
     displayManager.defaultSession = "none+exwm";
   };
 
