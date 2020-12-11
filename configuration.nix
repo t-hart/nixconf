@@ -2,7 +2,7 @@
 
 let
   # keyboard
-  compiledLayout = pkgs.runCommand "keyboard-layout" { } ''
+  compiledLayout = pkgs.runCommand "keyboard-layout" {} ''
     ${pkgs.xorg.xkbcomp}/bin/xkbcomp ${/etc/nixos/layout.xkb} $out
   '';
 
@@ -14,8 +14,11 @@ let
     exec -a "$0" "$@"
   '';
 
-in {
-  imports = [ # Include the results of the hardware scan.
+
+in
+{
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
 
@@ -81,10 +84,14 @@ in {
   nixpkgs.config.allowUnfree = true;
 
   nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url =
-        "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
-    }))
+    (
+      import (
+        builtins.fetchTarball {
+          url =
+            "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
+        }
+      )
+    )
   ];
 
   environment = {
@@ -290,9 +297,9 @@ in {
     wantedBy = [ "graphical-session.target" ];
     environment = {
       QT_PLUGIN_PATH = "/run/current-system/sw/"
-        + pkgs.qt5.qtbase.qtPluginPrefix;
+      + pkgs.qt5.qtbase.qtPluginPrefix;
       QML2_IMPORT_PATH = "/run/current-system/sw/"
-        + pkgs.qt5.qtbase.qtQmlPrefix;
+      + pkgs.qt5.qtbase.qtQmlPrefix;
     };
     serviceConfig = {
       ExecStart = "${pkgs.dropbox.out}/bin/dropbox";
