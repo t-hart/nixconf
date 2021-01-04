@@ -26,10 +26,35 @@ in
   boot = {
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
-    kernelParams =
-      [ "acpi_rev_override" "mem_sleep_default=deep" "intel_iommu=igfx_off" ];
+    kernelParams = [
+      "acpi_rev_override"
+      "mem_sleep_default=deep"
+      "intel_iommu=igfx_off"
+      # PCI-Express Runtime D3 (RTD3) Power Management
+      # https://download.nvidia.com/XFree86/Linux-x86_64/450.51/README/dynamicpowermanagement.html
+      "nvidia.NVreg_DynamicPowerManagement=0x02"
+      # If the Spectre V2 mitigation is necessary, some performance may be recovered by setting the
+      # NVreg_CheckPCIConfigSpace kernel module parameter to 0. This will disable the NVIDIA driver's
+      # sanity checks of GPU PCI config space at various entry points, which were originally required
+      # to detect and correct config space manipulation done by X server versions prior to 1.7.
+      "nvidia.NVreg_CheckPCIConfigSpace=0"
+      # Enable the PAT feature [5], which affects how memory is allocated. PAT was first introduced in
+      # Pentium III [6] and is supported by most newer CPUs (see wikipedia:Page attribute table#Processors).
+      # If your system can support this feature, it should improve performance.
+      "nvidia.NVreg_UsePageAttributeTable=1"
+    ];
     kernelPackages = pkgs.linuxPackages_latest;
     extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
+
+    blacklistedKernelModules = [
+      "nouveau"
+      "nvidiafb"
+
+      "nvidia"
+      "nvidia-uvm"
+      "nvidia_drm"
+      "nvidia_modeset"
+    ];
 
     tmpOnTmpfs = true;
   };
@@ -166,25 +191,19 @@ in
     gnupg = { agent.enable = true; };
   };
 
-  hardware.nvidia.prime = {
-    offload.enable = true;
-    nvidiaBusId = "PCI:1:0:0";
-    intelBusId = "PCI:0:2:0";
+  hardware.nvidia = {
+    prime = {
+      offload.enable = true;
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
+    };
+    modesetting.enable = true;
+    nvidiaPersistenced = true;
+    powerManagement.enable = true;
+
   };
 
-  # hardware.nvidiaOptimus.disable = true;
-  # hardware.opengl = {
-  #   extraPackages = [ pkgs.linuxPackages.nvidia_x11.out ];
-  #   extraPackages32 = [ pkgs.linuxPackages.nvidia_x11.lib32 ];
-  #   driSupport32Bit = true;
-  # };
-
-  # https://wiki.archlinux.org/index.php/Dell_XPS_15_9570#Letting_bumblebee_automatically_unload_the_kernel_module
-  # hardware.bumblebee = {
-  #   enable = true;
-  #   pmMethod = "auto";
-  #   connectDisplay = true;
-  # };
+  # hardware.opengl.enable = true;
 
   services.thermald.enable = true;
 
@@ -224,9 +243,7 @@ in
       ];
     };
 
-    screenSection = ''
-      Option "TripleBuffer" "On"
-    '';
+    useGlamor = true;
 
     displayManager.autoLogin.user = "thomas";
     displayManager.defaultSession = "none+exwm";
@@ -286,9 +303,8 @@ in
         MODE:="0666", \
         SYMLINK+="stm32_dfu"
 
-    # nvidia CUDA config
-    # KERNEL=="nvidia_uvm", RUN+="${pkgs.runtimeShell} -c 'mknod -m 666 /dev/nvidia-uvm c $(grep nvidia-uvm /proc/devices | cut -d \  -f 1) 0'"
-
+    # Runtime PM for PCI Device NVIDIA Corporation GP107M [GeForce GTX 1050 Ti Mobile]
+    ACTION=="add", SUBSYSTEMS=="pci", ATTRS{device}=="0x1901", ATTRS{vendor}=="0x8086", TEST=="power/control", ATTR{power/control}="auto"
   '';
 
   # based on https://nixos.wiki/wiki/Dropbox and https://discourse.nixos.org/t/using-dropbox-on-nixos/387/5
