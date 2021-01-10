@@ -139,6 +139,7 @@ in
       bind
       bitwarden-cli
       cacert
+      cachix
       curl
       dropbox-cli
       exfat
@@ -289,6 +290,7 @@ in
     shell = pkgs.fish;
   };
 
+  nix.trustedUsers = [ "root" "thomas" ];
   # services.emacs.enable = true;
   services.emacs.defaultEditor = true;
 
