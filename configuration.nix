@@ -14,6 +14,9 @@ let
     exec -a "$0" "$@"
   '';
 
+  unstableTarball =
+    fetchTarball
+      https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
 
 in
 {
@@ -106,7 +109,15 @@ in
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    packageOverrides = pkgs: {
+      unstable = import unstableTarball {
+        config = config.nixpkgs.config;
+      };
+    };
+
+    allowUnfree = true;
+  };
 
   nixpkgs.overlays = [
     (
