@@ -280,6 +280,7 @@ in
       "docker"
       "networkmanager"
       "plugdev"
+      "root"
       "systemd-journal"
       "video"
       "wheel"
