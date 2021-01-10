@@ -176,6 +176,9 @@ in
 
   hardware.bluetooth.enable = true;
 
+  # uncomment this when moving to unstable or to stable after 21.03/05
+  # hardware.keyboard.zsa.enable = true;
+
   programs = {
     fish = {
       enable = true;
@@ -264,6 +267,7 @@ in
       "disk"
       "docker"
       "networkmanager"
+      "plugdev"
       "systemd-journal"
       "video"
       "wheel"
