@@ -236,7 +236,8 @@ in
 
   services.picom = {
     enable = true;
-    inactiveOpacity = 0.8;
+    inactiveOpacity = 0.95;
+    vSync = true;
     settings = {
       "unredir-if-possible" = true;
       "focus-exclude" = "name = 'slock'";
