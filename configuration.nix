@@ -146,6 +146,7 @@ in
       fd
       fish
       git
+      home-manager
       ispell
       killall
       libinput
