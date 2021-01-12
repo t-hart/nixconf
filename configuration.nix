@@ -33,30 +33,16 @@ in
       "acpi_rev_override"
       "mem_sleep_default=deep"
       "intel_iommu=igfx_off"
-      # PCI-Express Runtime D3 (RTD3) Power Management
-      # https://download.nvidia.com/XFree86/Linux-x86_64/450.51/README/dynamicpowermanagement.html
-      "nvidia.NVreg_DynamicPowerManagement=0x02"
-      # If the Spectre V2 mitigation is necessary, some performance may be recovered by setting the
-      # NVreg_CheckPCIConfigSpace kernel module parameter to 0. This will disable the NVIDIA driver's
-      # sanity checks of GPU PCI config space at various entry points, which were originally required
-      # to detect and correct config space manipulation done by X server versions prior to 1.7.
-      "nvidia.NVreg_CheckPCIConfigSpace=0"
-      # Enable the PAT feature [5], which affects how memory is allocated. PAT was first introduced in
-      # Pentium III [6] and is supported by most newer CPUs (see wikipedia:Page attribute table#Processors).
-      # If your system can support this feature, it should improve performance.
-      "nvidia.NVreg_UsePageAttributeTable=1"
     ];
     kernelPackages = pkgs.linuxPackages_latest;
     extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
 
     blacklistedKernelModules = [
       "nouveau"
+      "rivab"
       "nvidiafb"
-
-      "nvidia"
-      "nvidia-uvm"
-      "nvidia_drm"
-      "nvidia_modeset"
+      "rivatv"
+      "nv"
     ];
 
     tmpOnTmpfs = true;
@@ -212,10 +198,6 @@ in
       intelBusId = "PCI:0:2:0";
       nvidiaBusId = "PCI:1:0:0";
     };
-    modesetting.enable = true;
-    nvidiaPersistenced = true;
-    powerManagement.enable = true;
-
   };
 
   # hardware.opengl.enable = true;
