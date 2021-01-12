@@ -18,11 +18,29 @@ let
     fetchTarball
       https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
 
+  # home-manager =
+
+  # my-exwm-emacs = (pkgs.emacsPackagesGen pkgs.emacsGcc).emacsWithPackages (epkgs: [ epkgs.exwm ]);
+
+  # my-exwm-emacs = pkgs.emacsWithPackagesFromUsePackage {
+  #   config = /home/thomas/.emacs.d/init.el;
+  #   package = pkgs.emacsGcc;
+  #   alwaysTangle = true;
+  #   # alwaysEnsure = true;
+  #   extraEmacsPackages = epkgs: [ epkgs.exwm ];
+  # };
+
+  # exwm-load-script = ''
+  #   (require 'exwm)
+  #   (exwm-init)
+  # '';
+
 in
 {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    # ./my-exwm.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -228,6 +246,20 @@ in
     autoRepeatInterval = 150;
 
     videoDrivers = [ "nvidia" ];
+
+    # windowManager.session = {
+    #   name = "exwm";
+    #   start = ''
+    #     ${my-exwm-emacs}/bin/emacs -l ${exwm-load-script}
+    #   '';
+    # };
+
+    # windowManager.myExwm = {
+    #   enable = true;
+    #   enableDefaultConfig = false;
+    #   executable = my-exwm-emacs;
+    #   loadScript = exwm-load-script;
+    # };
 
     windowManager.exwm = {
       enable = true;
