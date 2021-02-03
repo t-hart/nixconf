@@ -94,9 +94,12 @@ in
       fira-code
       fira-code-symbols
       ipafont
+      joypixels
       kochi-substitute
       mplus-outline-fonts
+      noto-fonts
       powerline-fonts
+      symbola
     ];
 
     fontconfig = {
@@ -104,6 +107,7 @@ in
         monospace = [ "DejaVu Sans Mono" "IPAGothic" ];
         sansSerif = [ "DejaVu Sans" "IPAPGothic" ];
         serif = [ "DejaVu Serif" "IPAPMincho" ];
+        emoji = ["JoyPixels"];
       };
     };
   };
